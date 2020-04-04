@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ArchLinux下i3wm关闭touchpad的 | Hoook</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="献给那些(我自己)触摸板坏掉的人.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ArchLinux下i3wm关闭touchpad的">
+<meta property="og:url" content="http://yoursite.com/child/2020/04/04/ArchLinux%E4%B8%8Bi3wm%E5%85%B3%E9%97%ADtouchpad%E7%9A%84/index.html">
+<meta property="og:site_name" content="Hoook">
+<meta property="og:description" content="献给那些(我自己)触摸板坏掉的人.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/child/2020/04/04/images/5.png">
+<meta property="article:published_time" content="2020-04-04T15:40:23.000Z">
+<meta property="article:modified_time" content="2020-04-04T16:15:35.463Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Manjaro">
+<meta property="article:tag" content="ArchLinux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/child/2020/04/04/images/5.png">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  
+<link rel="stylesheet" href="/css/index.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">CoderHoooK</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://github.com/CoderHoooK" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/tags" class="nav-menu ">TAGS</a>
+          
+        
+            <a href="/categories" class="nav-menu ">CATEGORIES</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">ArchLinux下i3wm关闭touchpad的</h2>
+  <p class="sub">Apr 4, 2020</p>
+  <article class="content">
+    <h2 id="我为啥不用TouchPad"><a href="#我为啥不用TouchPad" class="headerlink" title="我为啥不用TouchPad"></a>我为啥不用TouchPad</h2><p><em>我也不想啊，好好在键盘上操作不用动鼠标,这不好吗！可是TMD我触摸板坏了。</em><br><em>具体是我只要碰到触摸板，它就会一直处于左键按下状态，估计是按压的那块地方坏了。</em></p>
+<ul>
+<li><p>我的系统(没在别的系统上试过，其他系统仅供参考)<br><img src="/images/3.png" alt="os"> </p>
+</li>
+<li><p>利用xinput查看touchpad</p>
+<p>  <em>emm我也不知道叫啥</em></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xinput list</span><br></pre></td></tr></table></figure>
+<p>  <img src="../images/6.png" alt="xinputlist"></p>
+</li>
+<li><p>关闭Touchpad</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xinput disable [id]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开Touchpad</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xinput enable [id]</span><br></pre></td></tr></table></figure>
+<p>  <em>至此已经完成了关闭或开启触摸板的步骤</em></p>
+</li>
+</ul>
+<hr>
+<hr>
+<ul>
+<li>绑定到键盘事件,参考<a href="https://wiki.archlinux.org/index.php/Extra_keyboard_keys_in_Xorg" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Extra_keyboard_keys_in_Xorg</a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;bash</span><br><span class="line"></span><br><span class="line">declare -i ID</span><br><span class="line">ID&#x3D;&#96;xinput list | grep -Eio &#39;(touchpad|glidepoint)\s*id\&#x3D;[0-9]&#123;1,2&#125;&#39; | grep -Eo &#39;[0-9]&#123;1,2&#125;&#39;&#96;</span><br><span class="line">declare -i STATE</span><br><span class="line">STATE&#x3D;&#96;xinput list-props $ID|grep &#39;Device Enabled&#39;|awk &#39;&#123;print $4&#125;&#39;&#96;</span><br><span class="line">if [ $STATE -eq 1 ]</span><br><span class="line">then</span><br><span class="line">    xinput disable $ID</span><br><span class="line">    # echo &quot;Touchpad disabled.&quot;</span><br><span class="line">    # notify-send &#39;Touchpad&#39; &#39;Disabled&#39; -i &#x2F;usr&#x2F;share&#x2F;icons&#x2F;Adwaita&#x2F;48x48&#x2F;devices&#x2F;input-touchpad.png</span><br><span class="line">else</span><br><span class="line">    xinput enable $ID</span><br><span class="line">    # echo &quot;Touchpad enabled.&quot;</span><br><span class="line">    # notify-send &#39;Touchpad&#39; &#39;Enabled&#39; -i &#x2F;usr&#x2F;share&#x2F;icons&#x2F;Adwaita&#x2F;48x48&#x2F;devices&#x2F;input-touchpad.png</span><br><span class="line">fi</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><em>ps:</em><br><br><a href="http://https://wiki.archlinux.org/index.php/Touchpad_Synaptics_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E8%BD%AF%E5%BC%80%E5%85%B3" target="_blank" rel="noopener">ArchLinux WiKi</a></p>
+
+  </article>
+  <footer class="f-cf">
+    
+    
+      <a href="/2020/04/03/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" class="link f-fr">个人博客搭建⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  hk1207534154@gmail.com
+  
+    
+      
+        · <a href="https://github.com/CoderHoooK" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @CoderHoooK</span>
+</footer>
+  </div>
+</body>
+</html>
